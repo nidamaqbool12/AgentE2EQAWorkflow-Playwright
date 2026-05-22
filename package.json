@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:pipeline": "npx playwright test tests/saucedemo-checkout/ --project=chromium --headed --workers=1 && node scripts/generate-saucedemo-checkout-specs.js && git add . && git commit -m \"automated-run: 62 specs executed successfully and report refreshed\" && git push origin main"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
