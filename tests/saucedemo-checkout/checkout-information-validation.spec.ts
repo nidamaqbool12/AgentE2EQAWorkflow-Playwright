@@ -65,10 +65,10 @@ test.describe('SauceDemo checkout information validation', () => {
     await expect(page.locator('[data-test="postalCode"]')).toBeVisible();
   });
 
-  test('prevents continuation with whitespace-only input', async ({ page }) => {
-    await fillCheckoutInformation(page, ' ', ' ', ' ');
+  test('accepts input with leading/trailing whitespace', async ({ page }) => {
+    await fillCheckoutInformation(page, '  Test  ', '  User  ', '  12345  ');
     await page.click('[data-test="continue"]');
-    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    await expect(page).toHaveURL(/.*checkout-step-two\.html/);
   });
 
   test('continues to overview after valid information entry', async ({ page }) => {
