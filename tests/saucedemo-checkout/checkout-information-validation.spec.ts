@@ -29,7 +29,7 @@ test.describe('SauceDemo checkout information validation', () => {
   test('allows non-empty postal code values to continue', async ({ page }) => {
     await fillCheckoutInformation(page, 'Test', 'User', '!@#$%');
     await page.click('[data-test="continue"]');
-    await expect(page).toHaveURL('**/checkout-step-two.html');
+    await expect(page).toHaveURL(/.*checkout-step-two\.html/);
   });
 
   test('shows all checkout information fields', async ({ page }) => {
@@ -56,7 +56,7 @@ test.describe('SauceDemo checkout information validation', () => {
 
   test('cancel button returns to cart from checkout information', async ({ page }) => {
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/cart.html');
+    await expect(page).toHaveURL(/.*cart\.html/);
   });
 
   test('validates the order of checkout form fields', async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe('SauceDemo checkout information validation', () => {
   test('continues to overview after valid information entry', async ({ page }) => {
     await fillCheckoutInformation(page, 'Valid', 'User', '55555');
     await page.click('[data-test="continue"]');
-    await expect(page).toHaveURL('**/checkout-step-two.html');
+    await expect(page).toHaveURL(/.*checkout-step-two\.html/);
   });
 
   test('shows a cancel option on checkout information page', async ({ page }) => {

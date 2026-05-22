@@ -25,7 +25,7 @@ test.describe('SauceDemo order completion', () => {
 
   test('returns to inventory when back home is clicked', async ({ page }) => {
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('keeps cart empty after order completion', async ({ page }) => {
@@ -81,6 +81,6 @@ test.describe('SauceDemo order completion', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 });

@@ -34,7 +34,7 @@ test.describe('SauceDemo cart review', () => {
     await addProductsToCart(page, 1);
     await openCart(page);
     await page.click('[data-test="continue-shopping"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
     await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
   });
 
@@ -122,7 +122,7 @@ test.describe('SauceDemo checkout information validation', () => {
   test('allows non-empty postal code values to continue', async ({ page }) => {
     await fillCheckoutInformation(page, 'Test', 'User', '!@#$%');
     await page.click('[data-test="continue"]');
-    await expect(page).toHaveURL('**/checkout-step-two.html');
+    await expect(page).toHaveURL(/.*checkout-step-two\.html/);
   });
 
   test('shows all checkout information fields', async ({ page }) => {
@@ -149,7 +149,7 @@ test.describe('SauceDemo checkout information validation', () => {
 
   test('cancel button returns to cart from checkout information', async ({ page }) => {
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/cart.html');
+    await expect(page).toHaveURL(/.*cart\.html/);
   });
 
   test('validates the order of checkout form fields', async ({ page }) => {
@@ -167,7 +167,7 @@ test.describe('SauceDemo checkout information validation', () => {
   test('continues to overview after valid information entry', async ({ page }) => {
     await fillCheckoutInformation(page, 'Valid', 'User', '55555');
     await page.click('[data-test="continue"]');
-    await expect(page).toHaveURL('**/checkout-step-two.html');
+    await expect(page).toHaveURL(/.*checkout-step-two\.html/);
   });
 
   test('shows a cancel option on checkout information page', async ({ page }) => {
@@ -220,7 +220,7 @@ test.describe('SauceDemo order overview', () => {
 
   test('cancel from overview returns to inventory', async ({ page }) => {
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('keeps the item count after navigating away and back', async ({ page }) => {
@@ -278,7 +278,7 @@ test.describe('SauceDemo complete checkout flow', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('restarts a new order after completion', async ({ page }) => {
@@ -315,9 +315,9 @@ test.describe('SauceDemo complete checkout flow', () => {
     await addProductsToCart(page, 2);
     await startCheckout(page);
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/cart.html');
+    await expect(page).toHaveURL(/.*cart\.html/);
     await page.click('[data-test="continue-shopping"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
     await addProductsToCart(page, 1);
     await openCart(page);
     await page.click('[data-test="checkout"]');
@@ -375,7 +375,7 @@ test.describe('SauceDemo complete checkout flow', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('ensures complete order confirmation contains expected text', async ({ page }) => {
@@ -415,7 +415,7 @@ test.describe('SauceDemo order completion', () => {
 
   test('returns to inventory when back home is clicked', async ({ page }) => {
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('keeps cart empty after order completion', async ({ page }) => {
@@ -471,7 +471,7 @@ test.describe('SauceDemo order completion', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 });
 `,

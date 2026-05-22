@@ -16,7 +16,7 @@ const path = require('path');
     await page.fill('[data-test="username"]', 'standard_user');
     await page.fill('[data-test="password"]', 'secret_sauce');
     await page.click('[data-test="login-button"]');
-    await page.waitForURL('**/inventory.html', { timeout: 10000 });
+    await page.waitForURL(/.*inventory\.html/, { timeout: 10000 });
     await page.screenshot({ path: path.join(outputDir, '02-products-page.png') });
     results.push({ step: 'Login', status: 'passed', url: page.url() });
 
@@ -28,12 +28,12 @@ const path = require('path');
       throw new Error('Expected at least 2 add-to-cart buttons');
     }
     await page.click('.shopping_cart_link');
-    await page.waitForURL('**/cart.html');
+    await page.waitForURL(/.*cart\.html/);
     await page.screenshot({ path: path.join(outputDir, '03-cart-page.png') });
     results.push({ step: 'Cart review', status: 'passed', itemsAdded: 2 });
 
     await page.click('[data-test="checkout"]');
-    await page.waitForURL('**/checkout-step-one.html');
+    await page.waitForURL(/.*checkout-step-one\.html/);
     await page.screenshot({ path: path.join(outputDir, '04-checkout-information-page.png') });
     results.push({ step: 'Navigate to checkout information', status: 'passed' });
 
@@ -55,7 +55,7 @@ const path = require('path');
 
     await page.fill('[data-test="postalCode"]', '12345');
     await page.click('[data-test="continue"]');
-    await page.waitForURL('**/checkout-step-two.html');
+    await page.waitForURL(/.*checkout-step-two\.html/);
     await page.screenshot({ path: path.join(outputDir, '06-checkout-overview-page.png') });
     results.push({ step: 'Checkout overview', status: 'passed' });
 
@@ -65,7 +65,7 @@ const path = require('path');
     results.push({ step: 'Summary and totals', status: 'passed', summaryText, taxText, totalText });
 
     await page.click('[data-test="finish"]');
-    await page.waitForURL('**/checkout-complete.html');
+    await page.waitForURL(/.*checkout-complete\.html/);
     await page.screenshot({ path: path.join(outputDir, '07-order-confirmation-page.png') });
     const confirmation = await page.locator('.complete-header').innerText();
     results.push({ step: 'Order completion', status: 'passed', confirmation });

@@ -39,7 +39,7 @@ test.describe('SauceDemo order overview', () => {
 
   test('cancel from overview returns to inventory', async ({ page }) => {
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('keeps the item count after navigating away and back', async ({ page }) => {

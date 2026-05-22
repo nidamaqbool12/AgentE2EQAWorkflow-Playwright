@@ -22,7 +22,7 @@ test.describe('SauceDemo complete checkout flow', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('restarts a new order after completion', async ({ page }) => {
@@ -59,9 +59,9 @@ test.describe('SauceDemo complete checkout flow', () => {
     await addProductsToCart(page, 2);
     await startCheckout(page);
     await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL('**/cart.html');
+    await expect(page).toHaveURL(/.*cart\.html/);
     await page.click('[data-test="continue-shopping"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
     await addProductsToCart(page, 1);
     await openCart(page);
     await page.click('[data-test="checkout"]');
@@ -119,7 +119,7 @@ test.describe('SauceDemo complete checkout flow', () => {
     await continueToOverview(page);
     await finishOrder(page);
     await page.click('[data-test="back-to-products"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
   });
 
   test('ensures complete order confirmation contains expected text', async ({ page }) => {

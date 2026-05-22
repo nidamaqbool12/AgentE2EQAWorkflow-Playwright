@@ -9,7 +9,8 @@ test.describe('SauceDemo cart review', () => {
   test('displays inventory after logging in', async ({ page }) => {
     await expect(page).toHaveTitle(/Swag Labs/);
     await expect(page.locator('.inventory_list')).toBeVisible();
-    await expect(page.locator('.inventory_item')).toHaveCountGreaterThan(0);
+    const count = await page.locator('.inventory_item').count();
+    expect(count).toBeGreaterThan(0);
   });
 
   test('adds products to the cart and updates badge count', async ({ page }) => {
@@ -29,7 +30,7 @@ test.describe('SauceDemo cart review', () => {
     await addProductsToCart(page, 1);
     await openCart(page);
     await page.click('[data-test="continue-shopping"]');
-    await expect(page).toHaveURL('**/inventory.html');
+    await expect(page).toHaveURL(/.*inventory\.html/);
     await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
   });
 
