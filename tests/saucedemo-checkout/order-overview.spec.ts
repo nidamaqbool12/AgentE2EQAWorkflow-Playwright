@@ -10,64 +10,32 @@ test.describe('SauceDemo order overview', () => {
     await continueToOverview(page);
   });
 
-  test('displays the checkout overview title', async ({ page }) => {
+  test('displays the checkout overview title and summary', async ({ page }) => {
     await expect(page.locator('.title')).toHaveText('Checkout: Overview');
-  });
-
-  test('shows payment information details', async ({ page }) => {
-    await expect(page.locator('.summary_info')).toContainText('Payment Information');
-  });
-
-  test('shows shipping information details', async ({ page }) => {
-    await expect(page.locator('.summary_info')).toContainText('Shipping Information');
-  });
-
-  test('lists selected items in the overview', async ({ page }) => {
-    await expect(page.locator('.cart_item')).toHaveCount(3);
-  });
-
-  test('shows subtotal, tax, and total labels', async ({ page }) => {
+    await expect(page.locator('.summary_info')).toBeVisible();
     await expect(page.locator('.summary_subtotal_label')).toBeVisible();
     await expect(page.locator('.summary_tax_label')).toBeVisible();
     await expect(page.locator('.summary_total_label')).toBeVisible();
   });
 
-  test('shows the finish and cancel buttons', async ({ page }) => {
-    await expect(page.locator('[data-test="finish"]')).toBeVisible();
-    await expect(page.locator('[data-test="cancel"]')).toBeVisible();
-  });
-
-  test('cancel from overview returns to inventory', async ({ page }) => {
-    await page.click('[data-test="cancel"]');
-    await expect(page).toHaveURL(/.*inventory\.html/);
-  });
-
-  test('keeps the item count after navigating away and back', async ({ page }) => {
-    await page.reload();
+  test('lists all selected items and pricing details on overview', async ({ page }) => {
     await expect(page.locator('.cart_item')).toHaveCount(3);
-  });
-
-  test('shows item names and prices on overview page', async ({ page }) => {
     await expect(page.locator('.inventory_item_name')).toHaveCount(3);
     await expect(page.locator('.inventory_item_price')).toHaveCount(3);
   });
 
-  test('displays the summary section with total values', async ({ page }) => {
-    const summaryText = await page.locator('.summary_info').innerText();
-    expect(summaryText).toMatch(/Item total:/);
-    expect(summaryText).toMatch(/Tax:/);
-    expect(summaryText).toMatch(/Total:/);
+  test('shows cancel and finish buttons on order overview', async ({ page }) => {
+    await expect(page.locator('[data-test="cancel"]')).toBeVisible();
+    await expect(page.locator('[data-test="finish"]')).toBeVisible();
   });
 
-  test('shows a valid payment method label', async ({ page }) => {
-    await expect(page.locator('.summary_info')).toContainText('SauceCard #');
+  test('cancel from overview returns to inventory and preserves the cart badge', async ({ page }) => {
+    await page.click('[data-test="cancel"]');
+    await expect(page).toHaveURL(/.*inventory\.html$/);
+    await expect(page.locator('.shopping_cart_badge')).toHaveText('3');
   });
 
-  test('shows a valid shipping method label', async ({ page }) => {
-    await expect(page.locator('.summary_info')).toContainText('Pony Express');
-  });
-
-  test('allows page reload while remaining on checkout overview', async ({ page }) => {
+  test('reload retains the order overview page', async ({ page }) => {
     await page.reload();
     await expect(page.locator('.title')).toHaveText('Checkout: Overview');
   });

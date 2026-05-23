@@ -6,162 +6,163 @@
 - Password: `secret_sauce`
 
 ## Test Objectives
-- Validate the full e-commerce checkout workflow for a logged-in customer.
-- Verify cart review, checkout information entry, order overview, order completion, and validation/error handling.
-- Ensure navigation behavior and order confirmation are correct.
+- Validate the complete checkout workflow from cart review through order confirmation.
+- Verify required field validation, cancellation behavior, navigation flows, and order completion.
+- Cover both happy path execution and negative validation scenarios.
 
-## Test Coverage
-- Happy path checkout flow
-- Required field validation
-- Cancel and navigation behavior
-- Order summary and pricing calculations
-- Successful order completion and back-home navigation
+## Coverage Summary
+- AC1: Cart review content, cart badge updates, and checkout navigation
+- AC2: Mandatory checkout fields, validation errors, and checkout page behavior
+- AC3: Order overview summary, payment/shipping detail visibility, and navigation options
+- AC4: Order completion confirmation, success message, and back-home navigation
+- AC5: Invalid data handling, cancel paths, and whitespace/input edge cases
 
 ---
 
-## Test Scenario 1: Login and Add Items to Cart
+## Test Scenario 1: Login, Add Items, and Open Cart
 
 ### Description
-Verify user can log in and add products to the cart.
+Validate successful login, product selection, cart badge updates, and cart contents display.
 
 ### Preconditions
 - User is on the SauceDemo login page.
 
 ### Test Steps
-1. Open `https://www.saucedemo.com`.
-2. Enter username `standard_user`.
-3. Enter password `secret_sauce`.
-4. Click `Login`.
-5. Confirm landing on the products page.
-6. Add two products to the cart.
-7. Open the shopping cart.
+1. Navigate to `https://www.saucedemo.com`.
+2. Enter username `standard_user` and password `secret_sauce`.
+3. Click `Login`.
+4. Confirm the inventory page loads.
+5. Add two products to the cart.
+6. Open the shopping cart page.
 
 ### Expected Results
-- Login succeeds and the products page is displayed.
-- Cart badge updates to show the added items.
-- Cart page shows the selected items with name, description, price, and quantity.
-- Total price is displayed on the cart page.
+- Login succeeds and inventory page is visible.
+- Cart badge shows `2` after adding items.
+- Cart page lists the selected items with name, description, and price.
+- Product quantities are shown correctly.
 
 ---
 
-## Test Scenario 2: Cart Review and Checkout Navigation
+## Test Scenario 2: Cart Review Page Validation
 
 ### Description
-Verify cart contents and the ability to proceed to checkout.
+Verify cart review page details, remove action, continue shopping, and total information.
 
 ### Preconditions
 - User is logged in and has items in the cart.
 
 ### Test Steps
-1. From the cart page, verify each item name, description, and price.
-2. Confirm the cart total shows correct item count.
-3. Click `Checkout`.
+1. Open the cart page.
+2. Verify each cart item name, description, and price.
+3. Confirm the cart badge value reflects the selected items.
+4. Click `Continue Shopping` and confirm return to inventory.
+5. Return to cart and remove one item.
 
 ### Expected Results
-- Cart review page displays all item details.
-- The page shows correct subtotal or total calculations.
-- Clicking `Checkout` navigates to the checkout information page.
+- Cart shows all selected items and correct pricing details.
+- Continue shopping returns the user to inventory.
+- Removing an item updates cart count and badge value.
 
 ---
 
-## Test Scenario 3: Checkout Information Required Fields
+## Test Scenario 3: Checkout Information Mandatory Field Validation
 
 ### Description
-Verify the checkout information page requires all fields.
+Validate that checkout information fields are mandatory and show errors when empty.
 
 ### Preconditions
-- User is on the checkout information page.
+- User is on the checkout information page with items in the cart.
 
 ### Test Steps
-1. Leave First Name blank, enter valid Last Name and Zip Code, click `Continue`.
-2. Leave Last Name blank, enter valid First Name and Zip Code, click `Continue`.
+1. Leave First Name blank, enter valid Last Name and Postal Code, click `Continue`.
+2. Leave Last Name blank, enter valid First Name and Postal Code, click `Continue`.
 3. Leave Postal Code blank, enter valid First Name and Last Name, click `Continue`.
 
 ### Expected Results
-- Each invalid submission shows a visible error message for the missing field.
-- The user remains on the checkout information page until all fields are valid.
+- Each missing field produces a visible validation error.
+- User remains on the checkout information page until all fields are filled.
 
 ---
 
-## Test Scenario 4: Successful Checkout Information Submission
+## Test Scenario 4: Checkout Information Valid Submission
 
 ### Description
-Verify valid checkout information advances to the order overview page.
+Verify valid checkout information advances to order overview.
 
 ### Preconditions
-- User is on the checkout information page with cart items present.
+- User is on the checkout information page with valid cart items.
 
 ### Test Steps
-1. Enter First Name `Test`.
-2. Enter Last Name `User`.
-3. Enter Postal Code `12345`.
-4. Click `Continue`.
+1. Enter First Name `Test`, Last Name `User`, and Postal Code `12345`.
+2. Click `Continue`.
 
 ### Expected Results
-- The application navigates to the checkout overview page.
-- Order overview displays all selected items.
-- Payment information and shipping information are visible.
-- Subtotal, tax, and total values are displayed.
-- Buttons for `Cancel` and `Finish` are visible.
+- Application navigates to Checkout Overview.
+- Order overview page shows selected items, payment/shipping info, subtotal, tax, total.
+- `Cancel` and `Finish` buttons are visible.
 
 ---
 
-## Test Scenario 5: Checkout Overview and Order Completion
+## Test Scenario 5: Checkout Overview Cancellation and Navigation
 
 ### Description
-Verify the order completion workflow and order confirmation.
+Verify canceling from checkout overview returns to cart and preserves contents.
+
+### Preconditions
+- User is on the checkout overview page.
+
+### Test Steps
+1. Click `Cancel` on the overview page.
+2. Confirm the user returns to the cart page.
+
+### Expected Results
+- Cancel returns the user to the cart page.
+- Cart contents remain intact.
+
+---
+
+## Test Scenario 6: Order Completion and Back Home Behavior
+
+### Description
+Verify successful checkout completion and ability to return to products.
 
 ### Preconditions
 - User is on the checkout overview page.
 
 ### Test Steps
 1. Click `Finish`.
+2. Confirm the order confirmation page loads.
+3. Click `Back Home`.
 
 ### Expected Results
 - User is redirected to the order confirmation page.
-- A success message confirming the order is visible.
-- A `Back Home` button is present.
-- The order confirmation page indicates the order was placed.
-
----
-
-## Test Scenario 6: Cancel Checkout and Navigation Behavior
-
-### Description
-Verify users can cancel checkout and return to the cart.
-
-### Preconditions
-- User is on the checkout information or overview page.
-
-### Test Steps
-1. If on checkout information page, click `Cancel` and confirm return to cart.
-2. If on checkout overview page, click `Cancel` and confirm return to cart.
-
-### Expected Results
-- Clicking `Cancel` returns the user to the cart page.
-- Cart contents remain unchanged.
+- A success message appears.
+- `Back Home` returns the user to the inventory page.
+- The cart is cleared after order completion.
 
 ---
 
 ## Test Scenario 7: Invalid Checkout Data Handling
 
 ### Description
-Verify invalid input is handled correctly on the checkout information page.
+Verify invalid postal code and whitespace edge case handling on checkout information.
 
 ### Preconditions
 - User is on the checkout information page.
 
 ### Test Steps
-1. Enter invalid characters into Postal Code, e.g. `!@#$%`, with valid first and last names.
-2. Click `Continue`.
+1. Enter invalid Postal Code `!@#$%` with valid first/last names and click `Continue`.
+2. Enter whitespace-padded values for all fields and click `Continue`.
 
 ### Expected Results
-- Validation error appears indicating invalid postal code format, or the form prevents submission.
-- The user cannot proceed until the data is corrected.
+- Invalid postal code triggers an error or prevents progression.
+- Whitespace-padded fields are handled consistently based on actual app behavior.
+- The user should only proceed if the checkout information is acceptable.
 
 ---
 
 ## Notes
-- Manual exploratory testing should capture screenshots at the cart review, checkout form errors, order overview, and order confirmation states.
-- Automated tests should run across Chromium, Firefox, and WebKit.
-- If UI selectors change, prefer stable IDs, data-test attributes, or role-based selectors.
+- Include screenshots for cart review, checkout errors, overview, and confirmation states.
+- Prefer stable selectors such as `data-test` attributes in the generated scripts.
+- Ensure the suite supports Chromium, Firefox, and WebKit.
+- If actual SauceDemo behavior differs from the acceptance criteria, document the discrepancy and align tests accordingly.
