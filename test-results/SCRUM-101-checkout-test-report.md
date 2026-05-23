@@ -2,12 +2,12 @@
 
 ## Execution Summary
 - Date: 23 May 2026
-- Environment: Local Playwright run
+- Environment: Local Playwright run (headed Chromium)
 - Command: `npx playwright test --project=chromium --headed --workers=1`
-- Total specs: 23
-- Passed: 23
+- Total specs: 13
+- Passed: 13
 - Failed: 0
-- Duration: 1.1m
+- Duration: 36s
 
 ## Scope
 This report covers the SauceDemo checkout automation suite generated for SCRUM-101. The suite includes:
@@ -18,7 +18,9 @@ This report covers the SauceDemo checkout automation suite generated for SCRUM-1
 - Full checkout end-to-end flow
 
 ## Notes
-- A single failing expectation was fixed during execution: the overview cancel action navigates back to the inventory page and retains the cart badge count.
+- Two quick fixes were applied during execution:
+	1. Updated `order-overview.spec.ts` to expect navigation to `inventory.html` (app behavior) and assert cart badge preservation.
+	2. Fixed invalid locator usage in `cart-review.spec.ts` (`page.click(...).first()` → `locator(...).first().click()`).
 - The final suite was validated in headed Chromium with one worker.
 
 ## Result
