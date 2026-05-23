@@ -1,4 +1,5 @@
 name: Playwright Tests
+# Full E2E test suite for SCRUM-101 checkout workflow
 on:
   push:
     branches: [ main, master ]
