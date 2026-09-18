@@ -46,7 +46,7 @@ Browser interaction throughout the workflow is powered by **Playwright MCP tools
 
 ---
 
-## ⚙️ Prerequisites
+##  Prerequisites
 
 - Node.js (LTS recommended)
 - Playwright installed (`npm install @playwright/test`)
