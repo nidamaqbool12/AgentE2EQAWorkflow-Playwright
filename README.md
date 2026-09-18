@@ -6,7 +6,7 @@ This project demonstrates how AI agents can collaborate across the full QA lifec
 
 ---
 
-## 🧭 Overview
+##  Overview
 
 The workflow takes a single input (a user story) and produces:
 
@@ -29,7 +29,7 @@ Browser interaction throughout the workflow is powered by **Playwright MCP tools
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 .
@@ -58,7 +58,7 @@ Browser interaction throughout the workflow is powered by **Playwright MCP tools
 
 ---
 
-## 🔄 Workflow
+##  Workflow
 
 The workflow runs in **7 steps**. Each step can be run individually or chained together in a single combined prompt.
 
@@ -102,13 +102,13 @@ https://github.com/nidamaqbool12/AgentE2EQAWorkflow-Playwright.git
 
 ---
 
-## 🚀 Running the Full Workflow
+##  Running the Full Workflow
 
 Each step above has a corresponding natural-language prompt (see the full prompt set in this repo's workflow documentation). Steps can be run one at a time for review/control, or chained as a single combined prompt to execute the entire pipeline end-to-end with status updates after each step.
 
 ---
 
-## 📊 Output Artifacts
+##  Output Artifacts
 
 | Artifact | Location |
 |---|---|
@@ -118,7 +118,7 @@ Each step above has a corresponding natural-language prompt (see the full prompt
 
 ---
 
-## 🧪 Tech Stack
+##  Tech Stack
 
 - **Playwright** (JavaScript) — browser automation
 - **MCP (Model Context Protocol)** — Playwright MCP server + GitHub MCP server
@@ -127,7 +127,7 @@ Each step above has a corresponding natural-language prompt (see the full prompt
 
 ---
 
-## 🔁 CI/CD — GitHub Actions
+##  CI/CD — GitHub Actions
 
 Automated tests can be wired into a GitHub Actions pipeline so the `tests/saucedemo-checkout/` suite runs automatically on every push/PR, and on a schedule.
 
