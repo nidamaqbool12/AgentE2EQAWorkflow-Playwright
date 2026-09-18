@@ -57,7 +57,7 @@ Browser interaction throughout the workflow is powered by **Playwright MCP tools
 
 ##  Prerequisites
 
-- Node.js (LTS recommended)
+- Node.js 
 - Playwright installed (`npm install @playwright/test`)
 - Access to an MCP-enabled AI assistant (e.g., Claude) with:
   - Playwright MCP server (browser automation)
@@ -215,9 +215,4 @@ Key steps:
 
 
 
-
-## 📌 Notes
-
-- This project was built as a demonstration of AI-agent-driven QA workflows and is designed to be adapted to other applications/user stories by swapping the input user story file and target application URL.
-- Self-healing reduces flaky test maintenance overhead by automatically correcting common failure causes (stale selectors, timing issues) rather than requiring manual debugging each run.
 
