@@ -32,16 +32,25 @@ Browser interaction throughout the workflow is powered by **Playwright MCP tools
 ##  Project Structure
 
 ```
-.
-├── user-stories/
-│   └── SCRUM-101-ecommerce-checkout.md      # Input user story
+├── .github/
+│   ├── agents/
+│   │   ├── playwright-test-generator.agent.md
+│   │   ├── playwright-test-healer.agent.md
+│   │   └── playwright-test-planner.agent.md
+│   └── workflows/
+├── .vscode/
+├── User_stories/
+├── mcp.json
+├── scripts/
+│   ├── debug-saucedemo-behavior.js
+│   ├── debug-saucedemo-cancel.js
+│   ├── explore-saucedemo-checkout.js
+│   └── generate-saucedemo-checkout-tests.js
 ├── specs/
-│   └── saucedemo-checkout-test-plan.md      # Generated test plan
-├── tests/
-│   └── saucedemo-checkout/                  # Generated Playwright automation scripts
-├── test-results/
-│   └── SCRUM-101-checkout-test-report.md    # Final QA report
-└── README.md
+│   ├── README.md
+│   └── saucedemo-checkout-test-plan.md
+└── test-results/
+    └── SCRUM-101-checkout-test-report.md
 ```
 
 ---
